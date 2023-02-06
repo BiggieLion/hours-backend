@@ -3,8 +3,7 @@ from flask_cors import CORS
 from .utils.extensions import mongo
 
 
-
-def create_app(settings_module = 'config.development'):
+def create_app(settings_module='config.development'):
     app = Flask(__name__)
     app.config.from_object(settings_module)
 
@@ -24,7 +23,8 @@ def create_app(settings_module = 'config.development'):
             'test': app.config.get("SECRET_KEY")
         }, 200
 
+    # Importing and registering blueprints
     from .auth import auth_router
     app.register_blueprint(auth_router)
-    
+
     return app
